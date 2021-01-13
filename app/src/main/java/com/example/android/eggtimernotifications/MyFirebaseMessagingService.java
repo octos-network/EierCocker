@@ -20,6 +20,13 @@ public class MyFirebaseMessagingService extends Service {
         Log.d(TAG, "Message data payload: " + remoteMessage.data)
     }
 
+        // TODO: Step 3.6 check messages for notification and call sendNotification
+        // Check if message contains a notification payload.
+        remoteMessage?.notification?.let {
+            Log.d(TAG, "Message Notification Body: ${it.body}")
+            sendNotification(it.body!!)
+        }
+
 }
 // [END receive_message]
 
@@ -37,6 +44,10 @@ public class MyFirebaseMessagingService extends Service {
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.
         sendRegistrationToServer(token)
+    }
+
+    companion object {
+        private const val TAG = "MyFirebasMsgService"
     }
     // [END on_new_token]
 }
