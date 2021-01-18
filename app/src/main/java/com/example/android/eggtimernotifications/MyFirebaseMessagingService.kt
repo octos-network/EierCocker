@@ -1,24 +1,25 @@
-package com.example.android.eggtimernotifications;
+package com.example.android.eggtimernotifications
 
-import android.app.Service;
-import android.util.Log;
+import android.util.Log
+import com.google.firebase.messaging.FirebaseMessagingService
+import com.google.firebase.messaging.RemoteMessage
 
-import com.google.firebase.messaging.RemoteMessage;
+class MyFirebaseMessagingService : FirebaseMessagingService() {
 
-import static android.content.ContentValues.TAG;
-
-public class MyFirebaseMessagingService extends Service {
+    companion object {
+        private const val TAG = "MyFirebaseMsgService"
+    }
 
     // [START receive_message]
-    override fun onMessageReceived(remoteMessage:RemoteMessage?) {
+    override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
         Log.d(TAG, "From: ${remoteMessage?.from}")
 
-    // TODO: Step 3.5 check messages for data
-    // Check if message contains a data payload.
-    remoteMessage?.data?.let {
-        Log.d(TAG, "Message data payload: " + remoteMessage.data)
-    }
+        // TODO: Step 3.5 check messages for data
+        // Check if message contains a data payload.
+        remoteMessage?.data?.let {
+            Log.d(TAG, "Message data payload: " + remoteMessage.data)
+        }
 
         // TODO: Step 3.6 check messages for notification and call sendNotification
         // Check if message contains a notification payload.
@@ -27,8 +28,12 @@ public class MyFirebaseMessagingService extends Service {
             sendNotification(it.body!!)
         }
 
-}
-// [END receive_message]
+    }
+
+    private fun sendNotification(body: String): Any {
+        TODO("Not yet implemented")
+    }
+    // [END receive_message]
 
     // TODO: Step 3.2 log registration token
     // [START on_new_token]
@@ -46,8 +51,9 @@ public class MyFirebaseMessagingService extends Service {
         sendRegistrationToServer(token)
     }
 
-    companion object {
-        private const val TAG = "MyFirebasMsgService"
+    private fun sendRegistrationToServer(token: String?) {
+        TODO("Not yet implemented")
     }
     // [END on_new_token]
+
 }
